@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
-    private val loginViewModel : LoginViewModel by viewModel()
+    private val loginViewModel by viewModel<LoginViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +47,9 @@ class LoginFragment : Fragment() {
                     tilPassword.error = getString(R.string.text_password_rule)
                 else
                     tilPassword.isErrorEnabled = false
+            }
+            isLoading.observe(viewLifecycleOwner) {
+                progressBar.visibility = if (it) View.VISIBLE else View.GONE
             }
             loginBtnClick.observe(viewLifecycleOwner) {
                 findNavController().navigate(R.id.action_loginFragment_to_listInformationFragment)

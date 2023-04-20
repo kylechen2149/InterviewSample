@@ -1,5 +1,8 @@
 package com.kylechen2149.interviewsample.di
 
+import com.kylechen2149.interviewsample.SharedViewModel
+import com.kylechen2149.interviewsample.listInformation.repository.ListInformationRepository
+import com.kylechen2149.interviewsample.listInformation.viewmodel.ListInformationViewModel
 import com.kylechen2149.interviewsample.login.datasource.LoginService
 import com.kylechen2149.interviewsample.login.repository.LoginRepository
 import com.kylechen2149.interviewsample.login.viewmodel.LoginViewModel
@@ -21,22 +24,17 @@ val appModule = module {
 
 val apiModule = module {
     single<LoginService> { get<Retrofit>().create(LoginService::class.java) }
-//    single<Liveroom> { get<Retrofit>().create(Liveroom::class.java) }
-//    single<Common> { get<Retrofit>().create(Common::class.java) }
 }
 
 val repoModule = module {
     single { LoginRepository(get()) }
-//    single { LiveroomRepo(get()) }
-//    single { CommonRepo(get()) }
+    single { ListInformationRepository() }
 }
 
 val viewModelModule = module {
-//    viewModel { SharedViewModel() }
+    viewModel { SharedViewModel() }
     viewModel { LoginViewModel(get()) }
-//    viewModel { MainViewModel() }
-//    viewModel { CreateRoomViewModel(get(), get()) }
-//    viewModel { MyLiveViewModel(get()) }
+    viewModel { ListInformationViewModel(get()) }
 }
 
 val koinModules = listOf(appModule, apiModule, repoModule, viewModelModule)

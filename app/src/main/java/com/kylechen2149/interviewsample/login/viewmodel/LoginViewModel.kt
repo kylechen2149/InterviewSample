@@ -23,10 +23,12 @@ class LoginViewModel(private val loginRepository: LoginRepository): ViewModel() 
         get() = _loginBtnClick
 
     fun onSignInClick() = viewModelScope.launch {
+        _isLoading.value = true
         val response = loginRepository.login(email.value.toString(), password.value.toString())
         response.let {
             InterviewSampleApp.sharedPreferences.edit().putString(HEADER_SESSION_TOKEN, it.sessionToken).apply()
         }
+        _isLoading.value = false
         _loginBtnClick.postValue(Unit)
     }
 }

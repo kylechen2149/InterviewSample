@@ -16,31 +16,73 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/Theme.InterviewSample.AppBarOverlay"
-            android:visibility="gone">
+            android:layout_height="48dp"
+            android:background="@color/white"
+            bind:setVisibility="@{viewModel.isShowToolbar}">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/Theme.InterviewSample.PopupOverlay" />
+                android:layout_height="match_parent">
 
-        </com.google.android.material.appbar.AppBarLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/scope_back"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    bind:setVisibility="@{viewModel.isShowBack}">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:onClick="@{() -> viewModel.onToolbarBackClick()}"
+                        android:src="@drawable/ic_baseline_keyboard_backspace_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/scope_back"
+                    app:layout_constraintEnd_toStartOf="@id/timezone"
+                    android:text="@{viewModel.toolbarTitle}"
+                    bind:setVisibility="@{viewModel.isShowToolbarTitle}"
+                    tools:text="Title" />
+
+                <TextView
+                    android:id="@+id/timezone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/text_time_zone"
+                    android:onClick="@{() -> viewModel.onTimeZoneClick()}"
+                    bind:setVisibility="@{viewModel.isShowTimeZone}"
+                    tools:text="Title" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <include layout="@layout/content_main" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="16dp"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

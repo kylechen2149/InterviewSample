@@ -15,4 +15,8 @@
     <string name="text_please_input_email">Please input Email</string>
     <string name="text_please_input_correct_email">Please input correct Email format</string>
     <string name="text_password_rule">Password must in 6 to 14 characters</string>
+    <string name="text_time_zone">Time Zone</string>
+    <string name="text_list_title">Taipei parking information</string>
+    <string name="text_all_desc">/** alldesc **/\nid: %s\nname: %s\naddress: %s\ntotalcar: %s</string>
+    <string name="text_all_available">/** allavailable **/\navailablecar: %s\n待機中總數: %s\n充電中總數: %s</string>
 </resources>
