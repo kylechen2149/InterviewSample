@@ -20,4 +20,5 @@
     <string name="text_all_desc">/** alldesc **/\nid: %s\nname: %s\naddress: %s\ntotalcar: %s</string>
     <string name="text_all_available">/** allavailable **/\navailablecar: %s\n待機中總數: %s\n充電中總數: %s</string>
     <string name="text_email_with_parameter">Email: %s</string>
+    <string name="text_update_timezone_msg">Update time zone successful</string>
 </resources>

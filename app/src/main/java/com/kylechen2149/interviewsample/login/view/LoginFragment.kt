@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kylechen2149.interviewsample.R
+import com.kylechen2149.interviewsample.SharedViewModel
 import com.kylechen2149.interviewsample.databinding.FragmentLoginBinding
 import com.kylechen2149.interviewsample.login.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,12 +17,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginFragment : Fragment() {
 
     private val loginViewModel by viewModel<LoginViewModel>()
-
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
+    private lateinit var binding: FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        sharedViewModel.apply {
+            isShowToolbar.value = false
+        }
         return createDataBindingView(inflater, container)
     }
 
@@ -33,6 +39,7 @@ class LoginFragment : Fragment() {
         container,
         false
     ).apply {
+        binding = this
         viewModel = this@LoginFragment.loginViewModel.apply {
             email.observe(viewLifecycleOwner) { value ->
                 if (value.isNullOrBlank())
@@ -51,18 +58,17 @@ class LoginFragment : Fragment() {
             isLoading.observe(viewLifecycleOwner) {
                 progressBar.visibility = if (it) View.VISIBLE else View.GONE
             }
-            loginBtnClick.observe(viewLifecycleOwner) {
-                findNavController().navigate(R.id.action_loginFragment_to_listInformationFragment)
-            }
         }
     }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loginViewModel.apply {
+            loginBtnClick.observe(this@LoginFragment) { loginSuccess ->
+                if(loginSuccess) {
+                    findNavController().navigate(R.id.action_loginFragment_to_listInformationFragment)
+                }
+            }
+        }
     }
 }

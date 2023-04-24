@@ -17,7 +17,11 @@
         android:id="@+id/listInformationFragment"
         android:name="com.kylechen2149.interviewsample.listInformation.view.ListInformationFragment"
         android:label="fragment_list_information"
-        tools:layout="@layout/fragment_list_information" />
+        tools:layout="@layout/fragment_list_information" >
+        <action
+            android:id="@+id/action_listInformationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/updateUserFragment"
         android:name="com.kylechen2149.interviewsample.updateuser.view.UpdateUserFragment"

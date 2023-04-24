@@ -7,10 +7,11 @@ import com.kylechen2149.interviewsample.utils.HEADER_SESSION_TOKEN
 import com.kylechen2149.interviewsample.utils.KEY_NAME
 import com.kylechen2149.interviewsample.utils.KEY_OBJECT_ID
 import com.kylechen2149.interviewsample.utils.KEY_TIME_ZONE
+import retrofit2.Call
 
 class UpdateUserRepository(private val updateUserService: UpdateUserService) {
 
-    suspend fun updateUser(id: String, sessionToken: String) : UpdateUserResponse{
+    fun updateUser(id: String, sessionToken: String) : Call<UpdateUserResponse> {
         return updateUserService.updateUser("/api/users/$id", sessionToken)
     }
 

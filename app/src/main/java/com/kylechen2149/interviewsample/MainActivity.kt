@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             viewModel = sharedViewModel.apply {
                 toolbarBack.observe(this@MainActivity) {
                     if (it)
-                        onBackClicked()
+                        onBackPressed()
                 }
                 timeZoneClick.observe(this@MainActivity) {
                     if(it){
@@ -46,14 +46,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolBar)
     }
 
-    private fun onBackClicked() {
+    override fun onBackPressed() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
         val backStackEntryCount = navHostFragment?.childFragmentManager?.backStackEntryCount
 
-        if (backStackEntryCount == 0
-            || navController.currentDestination?.id == R.id.listInformationFragment
-        ) {
+        if (backStackEntryCount == 0) {
             finish()
             return
         }

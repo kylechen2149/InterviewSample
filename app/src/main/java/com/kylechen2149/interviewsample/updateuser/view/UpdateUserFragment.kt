@@ -56,13 +56,14 @@ class UpdateUserFragment : Fragment() {
                     tz.add(it)
                     val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, tz)
                     spinner.adapter = adapter
-                    spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                            updateTimeZone()
-                        }
-                        override fun onNothingSelected(parent: AdapterView<*>) {}
-                    }
                 }
+            }
+            spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                    if(pos > 0)
+                        updateTimeZone(requireContext())
+                }
+                override fun onNothingSelected(parent: AdapterView<*>) {}
             }
         }
     }.root

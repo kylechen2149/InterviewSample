@@ -30,7 +30,6 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/text_email"
                 android:textColor="@color/black"
-                app:boxStrokeColor="@color/black"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red">
 
@@ -53,7 +52,6 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/text_password"
                 android:textColor="@color/black"
-                app:boxStrokeColor="@color/black"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red">

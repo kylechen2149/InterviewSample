@@ -20,41 +20,51 @@ import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
 
-class LoginViewModel(private val loginRepository: LoginRepository): ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _loginBtnClick = MutableLiveData<Unit>()
-    val loginBtnClick: LiveData<Unit> = _loginBtnClick
+    private val _loginBtnClick = MutableLiveData(false)
+    val loginBtnClick: LiveData<Boolean> = _loginBtnClick
 
     fun onSignInClick(context: Context) = viewModelScope.launch {
         _isLoading.value = true
-        val response: Call<LoginResponse> = loginRepository.login(email.value.toString(), password.value.toString())
-        response.enqueue(object: Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    val res = response.body()
-                    Timber.d("res = $res")
-                    res?.let {
-                        loginRepository.saveData(it.sessionToken, it.name, it.timezone, it.objectId)
-                    }
-                    _loginBtnClick.postValue(Unit)
-                } else {
-                    try {
-                        response.errorBody()?.let {
-                            Toast.makeText(context, it.string(), Toast.LENGTH_SHORT).show()
+        loginRepository.login(email.value.toString(), password.value.toString())
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val res = response.body()
+                        Timber.d("res = $res")
+                        res?.let {
+                            loginRepository.saveData(
+                                it.sessionToken,
+                                it.name,
+                                it.timezone,
+                                it.objectId
+                            )
                         }
-                    } catch (e: Exception) {
-
+                        _loginBtnClick.postValue(true)
+                    } else {
+                        try {
+                            response.errorBody()?.let {
+                                Toast.makeText(context, it.string(), Toast.LENGTH_SHORT).show()
+                            }
+                            _loginBtnClick.postValue(false)
+                        } catch (e: Exception) {
+                            Timber.e(e.message)
+                        }
                     }
                 }
-            }
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
 
-            }
-        })
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Timber.e(t.message)
+                }
+            })
         _isLoading.value = false
     }
 }
