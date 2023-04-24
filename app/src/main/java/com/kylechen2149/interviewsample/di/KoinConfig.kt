@@ -7,6 +7,9 @@ import com.kylechen2149.interviewsample.login.datasource.LoginService
 import com.kylechen2149.interviewsample.login.repository.LoginRepository
 import com.kylechen2149.interviewsample.login.viewmodel.LoginViewModel
 import com.kylechen2149.interviewsample.network.getRetrofit
+import com.kylechen2149.interviewsample.updateuser.datasource.UpdateUserService
+import com.kylechen2149.interviewsample.updateuser.repository.UpdateUserRepository
+import com.kylechen2149.interviewsample.updateuser.viewmodel.UpdateUserViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -24,17 +27,20 @@ val appModule = module {
 
 val apiModule = module {
     single<LoginService> { get<Retrofit>().create(LoginService::class.java) }
+    single<UpdateUserService> { get<Retrofit>().create(UpdateUserService::class.java) }
 }
 
 val repoModule = module {
     single { LoginRepository(get()) }
     single { ListInformationRepository() }
+    single { UpdateUserRepository(get()) }
 }
 
 val viewModelModule = module {
     viewModel { SharedViewModel() }
     viewModel { LoginViewModel(get()) }
     viewModel { ListInformationViewModel(get()) }
+    viewModel { UpdateUserViewModel(get()) }
 }
 
 val koinModules = listOf(appModule, apiModule, repoModule, viewModelModule)

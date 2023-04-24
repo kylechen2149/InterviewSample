@@ -13,7 +13,7 @@ class ListInformationViewModel(private val listInformationRepository: ListInform
     val parkingInformationList = MutableLiveData<List<ParkingInformation>>()
 
     fun getParkingInformation(context: Context) = viewModelScope.launch {
-        parkingInformationList.postValue(listInformationRepository.getParkingJson(context))
+        parkingInformationList.value = listInformationRepository.getParkingJson(context).toMutableList()
     }
 
 }

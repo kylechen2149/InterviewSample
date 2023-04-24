@@ -16,13 +16,3 @@ fun setVisibility(view: View, isVisibility: Boolean) {
 fun setVisibilityGone(view: View, isVisibility: Boolean) {
     view.visibility = if (isVisibility) View.VISIBLE else View.GONE
 }
-
-@BindingAdapter("bind:parkingInformationListItem", "bind:viewModel", requireAll = false)
-fun setParkingInformationListItemsAdapter(
-    recyclerView: RecyclerView,
-    items: MutableList<ParkingInformation>?,
-    viewModel: ListInformationViewModel?
-) {
-    if (items == null || viewModel == null) return
-    recyclerView.adapter = ParkingInformationListDetailAdapter(items, viewModel)
-}

@@ -5,9 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="com.kylechen2149.interviewsample.R" />
-        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.kylechen2149.interviewsample.login.viewmodel.LoginViewModel" />
@@ -78,7 +75,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="32dp"
-                android:onClick="@{() -> viewModel.onSignInClick()}"
+                android:onClick="@{() -> viewModel.onSignInClick(context)}"
                 android:text="@string/text_login"/>
 
         </LinearLayout>

@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.kylechen2149.interviewsample.databinding.ActivityMainBinding
@@ -16,7 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val sharedViewModel by viewModel<SharedViewModel>()
-    //private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,13 +31,13 @@ class MainActivity : AppCompatActivity() {
                         onBackClicked()
                 }
                 timeZoneClick.observe(this@MainActivity) {
-//                    if(it){
-//                        findNavController(R.id.nav_host_fragment_content_main).popBackStack(
-//                            R.id.timeZoneFragment,
-//                            true
-//                        )
-//                        findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.timeZoneFragment)
-//                    }
+                    if(it){
+                        findNavController(R.id.nav_host_fragment_content_main).popBackStack(
+                            R.id.updateUserFragment,
+                            true
+                        )
+                        findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.updateUserFragment)
+                    }
                 }
             }
 

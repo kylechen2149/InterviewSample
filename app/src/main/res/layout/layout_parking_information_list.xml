@@ -8,10 +8,6 @@
         <variable
             name="record"
             type="com.kylechen2149.interviewsample.listInformation.model.ParkingInformation" />
-
-        <variable
-            name="viewModel"
-            type="com.kylechen2149.interviewsample.listInformation.viewmodel.ListInformationViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

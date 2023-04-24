@@ -18,4 +18,9 @@
         android:name="com.kylechen2149.interviewsample.listInformation.view.ListInformationFragment"
         android:label="fragment_list_information"
         tools:layout="@layout/fragment_list_information" />
+    <fragment
+        android:id="@+id/updateUserFragment"
+        android:name="com.kylechen2149.interviewsample.updateuser.view.UpdateUserFragment"
+        android:label="UpdateUserFragment"
+        tools:layout="@layout/fragment_update_user"/>
 </navigation>

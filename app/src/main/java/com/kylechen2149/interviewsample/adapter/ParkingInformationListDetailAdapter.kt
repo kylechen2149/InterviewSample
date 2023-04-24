@@ -10,16 +10,14 @@ import com.kylechen2149.interviewsample.listInformation.model.ParkingInformation
 import com.kylechen2149.interviewsample.listInformation.viewmodel.ListInformationViewModel
 
 class ParkingInformationListDetailAdapter(
-    private val items: MutableList<ParkingInformation>,
-    private val viewModel: ListInformationViewModel
+    private val items: MutableList<ParkingInformation>
 ) : RecyclerView.Adapter<ParkingInformationListDetailAdapter.ParkingInformationListViewHolder>() {
 
     class ParkingInformationListViewHolder(
         private val binding: LayoutParkingInformationListBinding
     ): RecyclerView.ViewHolder(binding.root){
-        fun bind(record: ParkingInformation, viewModel: ListInformationViewModel) {
+        fun bind(record: ParkingInformation) {
             binding.record = record
-            binding.viewModel = viewModel
             binding.executePendingBindings()
         }
     }
@@ -36,7 +34,7 @@ class ParkingInformationListDetailAdapter(
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ParkingInformationListViewHolder, position: Int) {
-        holder.bind(items[position], viewModel)
+        holder.bind(items[position])
     }
 
     // return the number of the items in the list
