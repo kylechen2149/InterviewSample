@@ -11,23 +11,13 @@ import retrofit2.Call
 
 class UpdateUserRepository(private val updateUserService: UpdateUserService) {
 
-    fun updateUser(id: String, sessionToken: String) : Call<UpdateUserResponse> {
-        return updateUserService.updateUser("/api/users/$id", sessionToken)
-    }
+    fun updateUser(id: String, sessionToken: String) : Call<UpdateUserResponse> = updateUserService.updateUser("/api/users/$id", sessionToken)
 
-    fun getObjectId() : String? {
-        return InterviewSampleApp.sharedPreferences.getString(KEY_OBJECT_ID, "")
-    }
+    fun getObjectId() : String? = InterviewSampleApp.sharedPreferences.getString(KEY_OBJECT_ID, "")
 
-    fun getToken() : String? {
-        return InterviewSampleApp.sharedPreferences.getString(HEADER_SESSION_TOKEN, "")
-    }
+    fun getToken() : String? = InterviewSampleApp.sharedPreferences.getString(HEADER_SESSION_TOKEN, "")
 
-    fun getUserName() : String? {
-       return InterviewSampleApp.sharedPreferences.getString(KEY_NAME, "")
-    }
+    fun getUserName() : String? = InterviewSampleApp.sharedPreferences.getString(KEY_NAME, "")
 
-    fun getTimeZone() : String? {
-        return InterviewSampleApp.sharedPreferences.getString(KEY_TIME_ZONE, "")
-    }
+    fun getTimeZone() : String?= InterviewSampleApp.sharedPreferences.getString(KEY_TIME_ZONE, "")
 }

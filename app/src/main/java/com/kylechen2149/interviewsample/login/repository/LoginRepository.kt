@@ -12,16 +12,13 @@ import retrofit2.Call
 
 class LoginRepository(private val loginService: LoginService) {
 
-    fun login(username: String, password: String): Call<LoginResponse> {
-        return loginService.login(LoginRequest(username, password))
-    }
+    fun login(username: String, password: String): Call<LoginResponse> = loginService.login(LoginRequest(username, password))
 
-    fun saveData(sessionToken: String?, name: String?, timezone: String?, objectId: String?): Boolean {
-        return InterviewSampleApp.sharedPreferences.edit().apply {
+    fun saveData(sessionToken: String?, name: String?, timezone: String?, objectId: String?): Boolean =
+        InterviewSampleApp.sharedPreferences.edit().apply {
             putString(HEADER_SESSION_TOKEN, sessionToken)
             putString(KEY_NAME, name)
             putString(KEY_TIME_ZONE, timezone)
             putString(KEY_OBJECT_ID, objectId)
         }.commit()
-    }
 }
